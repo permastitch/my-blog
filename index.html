@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essivara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fffef9;
+      --surface: #fdf8ee;
+      --purple-light: #f0ecf9;
+      --purple: #7c5cbf;
+      --purple-dark: #5a3d9a;
+      --yellow: #f5d84e;
+      --yellow-soft: #fdf3c0;
+      --ink: #2e2a38;
+      --muted: #8a8495;
+      --rule: #ede8f5;
+      --max: 720px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--purple);
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+    }
+
+    .blog-name {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 500;
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      letter-spacing: -0.3px;
+    }
+
+    .tagline {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      color: #d4c8f0;
+      font-style: italic;
+    }
+
+    nav {
+      margin-top: 1.25rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    nav a {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 400;
+      padding: 6px 16px;
+      border-radius: 20px;
+      transition: background 0.15s;
+    }
+
+    nav a:hover { background: rgba(255,255,255,0.15); }
+
+    /* ── Yellow banner ── */
+    .welcome-band {
+      background: var(--yellow);
+      padding: 0.7rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #4a3b00;
+      font-weight: 400;
+    }
+
+    /* ── Main ── */
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* ── Featured post ── */
+    .featured {
+      background: var(--purple-light);
+      border-radius: 16px;
+      padding: 2.25rem 2rem;
+      margin-bottom: 3rem;
+      border: 1px solid var(--rule);
+    }
+
+    .featured .pill {
+      display: inline-block;
+      background: var(--yellow);
+      color: #4a3b00;
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .featured h2 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+    }
+
+    .featured h2 a { color: var(--ink); text-decoration: none; }
+    .featured h2 a:hover { color: var(--purple-dark); }
+
+    .featured p {
+      font-size: 0.95rem;
+      color: #5a5468;
+      margin-bottom: 1.25rem;
+    }
+
+    .read-more {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--purple);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .read-more:hover { color: var(--purple-dark); text-decoration: underline; }
+
+    .post-date {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+    /* ── Section heading ── */
+    .section-heading {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--purple);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--yellow);
+      display: inline-block;
+    }
+
+    /* ── Post list ── */
+    .post-list { display: flex; flex-direction: column; gap: 0; }
+
+    .post-item {
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0 1.5rem;
+      align-items: start;
+    }
+
+    .post-item:last-child { border-bottom: none; }
+
+    .post-item .category {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--purple);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .post-item h3 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      line-height: 1.35;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-item h3 a { color: var(--ink); text-decoration: none; }
+    .post-item h3 a:hover { color: var(--purple-dark); }
+
+    .post-item .excerpt {
+      font-size: 0.9rem;
+      color: #6e687c;
+      line-height: 1.65;
+    }
+
+    .post-item .date-col {
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 0.2rem;
+    }
+
+    /* ── About box ── */
+    .about-box {
+      background: var(--yellow-soft);
+      border: 1px solid #e8d87a;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .about-box p {
+      font-size: 0.95rem;
+      color: #5a5000;
+      line-height: 1.7;
+    }
+
+    .about-box a { color: var(--purple-dark); font-weight: 500; text-decoration: none; }
+    .about-box a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--purple);
+      text-align: center;
+      padding: 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: #c4b8e8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="blog-name">Your Blog Name</a>
+    <p class="tagline">a little corner of the internet, all mine</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <div class="welcome-band">
+    ✨ Welcome! Pull up a chair and stay a while.
+  </div>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- Featured post -->
+    <div class="featured">
+      <span class="pill">Latest post</span>
+      <h2><a href="post1.html">The year I stopped doing things I hated</a></h2>
+      <p>I said no to a lot in 2024. To plans I didn't want to attend, habits that weren't mine, and a version of myself I'd outgrown. Here's what happened next.</p>
+      <a href="post1.html" class="read-more">Read more →</a>
+      <p class="post-date">12 May 2025</p>
+    </div>
+
+    <!-- Older posts -->
+    <p class="section-heading">More posts</p>
+
+    <div class="post-list">
+
+      <div class="post-item">
+        <div>
+          <p class="category">Habits</p>
+          <h3><a href="post2.html">Why I wake up at 6am now (and actually like it)</a></h3>
+          <p class="excerpt">Not a productivity hack. Just what happens when you stop fighting your own body clock.</p>
+        </div>
+        <div class="date-col">3 Apr 2025</div>
+      </div>
+
+      <div class="post-item">
+        <div>
+          <p class="category">Style</p>
+          <h3><a href="post3.html">Building a wardrobe with 30 things in it</a></h3>
+          <p class="excerpt">Less decision fatigue, more actually liking what I wear. A year into capsule dressing.</p>
+        </div>
+        <div class="date-col">18 Mar 2025</div>
+      </div>
+
+      <div class="post-item">
+        <div>
+          <p class="category">Food</p>
+          <h3><a href="post4.html">Cooking for one without losing the will to live</a></h3>
+          <p class="excerpt">The meals, tricks, and mindset shifts that made solo cooking something I actually look forward to.</p>
+        </div>
+        <div class="date-col">2 Feb 2025</div>
+      </div>
+
+    </div>
+
+    <!-- About box -->
+    <div class="about-box">
+      <p>Hi! I'm <a href="about.html">[Your Name]</a> — writing about everyday life, small habits, and figuring things out one post at a time. Glad you're here 💛</p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Your Blog Name</p>
+  </footer>
+
+</body>
+</html>
